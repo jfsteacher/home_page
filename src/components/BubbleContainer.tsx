@@ -7,54 +7,55 @@ const BubbleContainer: React.FC = () => {
       url: 'http://ascp3.jfsteacher.fr',
       title: 'ASCP3',
       description: 'Application de Suivi des Certifications Pix pour les élèves 3ème',
-      color: 'bg-blue-600'
+      color: 'bg-sky-300'
     },
     {
       url: 'https://ascp6.jfsteacher.fr/',
       title: 'ASCP6',
       description: 'Application de Suivi des Parcours PIX Pour les élèves de 6ème',
-      color: 'bg-purple-600'
+      color: 'bg-pink-200'
     },
     {
       url: 'https://enthdf.jfsteacher.fr/',
       title: 'ENT HDF',
       description: 'Les statistiques de l\'ENT',
-      color: 'bg-green-600'
+      color: 'bg-emerald-200'
     },
     {
       url: 'http://score.jfsteacher.fr',
       title: 'Scores',
       description: 'Calculs de scores',
-      color: 'bg-red-600'
+      color: 'bg-orange-200'
     },
     {
       url: 'http://jfs62223.free.fr/apps',
       title: 'Apps Edu',
       description: 'Sélection d\'applications',
-      color: 'bg-yellow-600'
+      color: 'bg-sky-300'
     },
     {
       url: 'http://jfs62223.free.fr/archi/',
       title: 'Espace Scolaire',
       description: 'Réflexion sur les espaces scolaires',
-      color: 'bg-indigo-600'
+      color: 'bg-emerald-200'
     },
     {
       url: 'http://ia.jfsteacher.fr',
       title: 'IA',
       description: 'Référencement d\'applications IA',
-      color: 'bg-pink-600'
+      color: 'bg-orange-200'
     },
     {
       url: 'http://jfs62223.free.fr/carte2D/Etab_2D.html',
       title: 'Carte 2D Ac Lille',
       description: 'Carte des établissements de l\'académie de Lille',
-      color: 'bg-teal-600'
-    }, {
+      color: 'bg-pink-200'
+    },
+    {
       url: 'http://jfs62223.free.fr/acc',
       title: 'Accessibilité numérique',
       description: 'L\'accessibilité numérique des documents textuels',
-      color: 'bg-teal-600'
+      color: 'bg-emerald-200'
     }
   ];
 

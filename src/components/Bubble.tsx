@@ -13,14 +13,10 @@ const Bubble: React.FC<BubbleProps> = ({ url, title, description, index, color }
   
   const getGradientClass = (baseColor: string) => {
     const gradientMap: Record<string, string> = {
-      'bg-blue-600': 'bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800',
-      'bg-purple-600': 'bg-gradient-to-br from-purple-400 via-purple-600 to-purple-800',
-      'bg-green-600': 'bg-gradient-to-br from-green-400 via-green-600 to-green-800',
-      'bg-red-600': 'bg-gradient-to-br from-red-400 via-red-600 to-red-800',
-      'bg-yellow-600': 'bg-gradient-to-br from-yellow-400 via-yellow-600 to-yellow-800',
-      'bg-indigo-600': 'bg-gradient-to-br from-indigo-400 via-indigo-600 to-indigo-800',
-      'bg-pink-600': 'bg-gradient-to-br from-pink-400 via-pink-600 to-pink-800',
-      'bg-teal-600': 'bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800'
+      'bg-sky-300': 'bg-gradient-to-br from-sky-200 via-sky-300 to-sky-400',
+      'bg-pink-200': 'bg-gradient-to-br from-pink-100 via-pink-200 to-pink-300',
+      'bg-emerald-200': 'bg-gradient-to-br from-emerald-100 via-emerald-200 to-emerald-300',
+      'bg-orange-200': 'bg-gradient-to-br from-orange-100 via-orange-200 to-orange-300'
     };
     return gradientMap[baseColor] || baseColor;
   };
@@ -32,22 +28,22 @@ const Bubble: React.FC<BubbleProps> = ({ url, title, description, index, color }
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-full sm:w-64 md:w-72 lg:w-80 aspect-square rounded-full flex flex-col items-center justify-center p-6 
-                ${gradientClass} shadow-[0_20px_50px_rgba(75,85,99,0.5)] text-white
-                transition-all duration-500 hover:shadow-[0_30px_60px_rgba(75,85,99,0.7)] hover:scale-105 hover:-translate-y-2
+      className={`w-full sm:w-64 md:w-72 lg:w-80 aspect-square rounded-2xl flex flex-col items-center justify-center p-6 
+                ${gradientClass} shadow-lg hover:shadow-xl text-gray-700
+                transition-all duration-500 hover:scale-105 hover:-translate-y-2
                 group relative overflow-hidden`}
       style={{ 
         animationDelay,
       }}
     >
-      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tl ${gradientClass.replace('-br', '-tl')} brightness-125`}></div>
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tl ${gradientClass.replace('-br', '-tl')} brightness-105`}></div>
       
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         {Array.from({ length: 3 }).map((_, i) => (
           <div 
             key={i}
-            className="absolute rounded-full border border-white/40 opacity-30"
+            className="absolute rounded-full border border-gray-700/10 opacity-30"
             style={{
               width: `${70 + i * 20}%`,
               height: `${70 + i * 20}%`,
@@ -64,9 +60,9 @@ const Bubble: React.FC<BubbleProps> = ({ url, title, description, index, color }
       </div>
       
       <div className="relative z-10 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 transition-transform duration-300 group-hover:scale-110 drop-shadow-lg">{title}</h2>
-        <div className="w-12 h-0.5 bg-white/70 mx-auto mb-3 transition-all duration-300 group-hover:w-16 group-hover:bg-white"></div>
-        <p className="text-sm md:text-base text-white transition-all duration-300 group-hover:text-white drop-shadow">{description}</p>
+        <h2 className="text-2xl md:text-3xl font-bold mb-2 transition-transform duration-300 group-hover:scale-110">{title}</h2>
+        <div className="w-12 h-0.5 bg-gray-700/30 mx-auto mb-3 transition-all duration-300 group-hover:w-16 group-hover:bg-gray-700/50"></div>
+        <p className="text-sm md:text-base text-gray-600 transition-all duration-300 group-hover:text-gray-800">{description}</p>
       </div>
     </a>
   );
