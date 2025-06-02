@@ -31,6 +31,17 @@ body {
   }
 }
 
+@keyframes twinkle {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
+
 .bubble-animation {
   animation: fadeIn 0.8s ease-out forwards;
   opacity: 0;
