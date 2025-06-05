@@ -21,17 +21,20 @@ const Header: React.FC = () => {
         ))}
       </div>
       <div className="container mx-auto px-4 relative z-10">
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-center tracking-tight bg-gradient-to-r from-sky-400 via-emerald-300 to-orange-300 text-transparent bg-clip-text">
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">j</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">f</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">s</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">t</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">e</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">a</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">c</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">h</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">e</span>
-          <span className="inline-block transform hover:scale-105 transition-transform duration-300">r</span>
+        <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-center tracking-tight">
+          {'jfsteacher'.split('').map((letter, index) => (
+            <span
+              key={index}
+              className="inline-block animate-letter bg-gradient-to-r from-sky-400 via-emerald-300 to-orange-300 text-transparent bg-clip-text"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                transform: 'translateY(0)',
+                opacity: 1,
+              }}
+            >
+              {letter}
+            </span>
+          ))}
         </h1>
         <div className="w-32 h-1 bg-gradient-to-r from-sky-400 via-emerald-300 to-orange-300 mx-auto mt-6 rounded-full"></div>
       </div>
