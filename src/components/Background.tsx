@@ -1,71 +1,98 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Background: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
+
+    // Ball class
+    class Ball {
+      x: number;
+      y: number;
+      dx: number;
+      dy: number;
+      radius: number;
+      color: string;
+
+      constructor() {
+        this.radius = Math.random() * 20 + 10;
+        this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
+        this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
+        this.dx = (Math.random() - 0.5) * 2;
+        this.dy = (Math.random() - 0.5) * 2;
+        this.color = `hsla(${Math.random() * 360}, 70%, 50%, 0.3)`;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      update() {
+        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+          this.dx = -this.dx;
+        }
+        if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+          this.dy = -this.dy;
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+
+        this.draw();
+      }
+    }
+
+    // Create balls
+    const balls: Ball[] = Array.from({ length: 50 }, () => new Ball());
+
+    // Animation loop
+    const animate = () => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, 'rgba(186, 230, 253, 0.4)'); // sky-200
+      gradient.addColorStop(1, 'rgba(125, 211, 252, 0.4)'); // sky-300
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      balls.forEach(ball => ball.update());
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', setCanvasSize);
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 -z-10 bg-sky-100">
-      <div className="absolute inset-0">
-        {/* Coups de pinceau principaux */}
-        {Array.from({ length: 25 }).map((_, index) => (
-          <div 
-            key={`stroke-${index}`}
-            className="absolute"
-            style={{
-              width: `${Math.random() * 400 + 300}px`,
-              height: `${Math.random() * 80 + 60}px`,
-              left: `${Math.random() * 120 - 10}%`,
-              top: `${Math.random() * 120 - 10}%`,
-              transform: `rotate(${35 + Math.random() * 25}deg)`,
-              background: `linear-gradient(45deg, 
-                ${Math.random() > 0.6 ? 'rgb(239, 68, 68)' : 'rgb(59, 130, 246)'} 0%,
-                ${Math.random() > 0.4 ? 'rgb(185, 28, 28)' : 'rgb(29, 78, 216)'} 100%)`,
-              opacity: Math.random() * 0.5 + 0.2,
-              filter: 'blur(12px)',
-              mixBlendMode: 'multiply',
-              borderRadius: '40% 60% 55% 45% / 40% 45% 55% 60%'
-            }}
-          />
-        ))}
-        
-        {/* Coups de pinceau secondaires */}
-        {Array.from({ length: 15 }).map((_, index) => (
-          <div 
-            key={`secondary-stroke-${index}`}
-            className="absolute"
-            style={{
-              width: `${Math.random() * 200 + 150}px`,
-              height: `${Math.random() * 40 + 30}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              transform: `rotate(${-20 + Math.random() * 40}deg)`,
-              background: `linear-gradient(45deg, 
-                rgba(239, 68, 68, 0.6),
-                rgba(59, 130, 246, 0.6))`,
-              opacity: Math.random() * 0.3 + 0.1,
-              filter: 'blur(8px)',
-              mixBlendMode: 'multiply',
-              borderRadius: '30% 70% 45% 55% / 50% 45% 55% 50%'
-            }}
-          />
-        ))}
-        
-        {/* Effets de brillance */}
-        {Array.from({ length: 40 }).map((_, index) => (
-          <div 
-            key={`sparkle-${index}`}
-            className="absolute rounded-full"
-            style={{
-              width: `${Math.random() * 6 + 2}px`,
-              height: `${Math.random() * 6 + 2}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: 'white',
-              opacity: Math.random() * 0.4 + 0.1,
-              animation: `twinkle ${Math.random() * 4 + 2}s infinite alternate`,
-              filter: 'blur(1px)'
-            }}
-          />
-        ))}
-      </div>
+    <div className="fixed inset-0 -z-10">
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full"
+        style={{ background: 'rgb(241, 245, 249)' }}
+      />
     </div>
   );
 };
