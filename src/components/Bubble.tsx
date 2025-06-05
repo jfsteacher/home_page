@@ -13,10 +13,10 @@ const Bubble: React.FC<BubbleProps> = ({ url, title, description, index, color }
   
   const getGradientClass = (baseColor: string) => {
     const gradientMap: Record<string, string> = {
-      'bg-sky-300': 'bg-gradient-to-br from-sky-200 via-sky-300 to-sky-400',
-      'bg-pink-200': 'bg-gradient-to-br from-pink-100 via-pink-200 to-pink-300',
-      'bg-emerald-200': 'bg-gradient-to-br from-emerald-100 via-emerald-200 to-emerald-300',
-      'bg-orange-200': 'bg-gradient-to-br from-orange-100 via-orange-200 to-orange-300'
+      'bg-amber-100': 'bg-gradient-to-br from-amber-50 via-amber-100 to-amber-200',
+      'bg-rose-100': 'bg-gradient-to-br from-rose-50 via-rose-100 to-rose-200',
+      'bg-emerald-100': 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200',
+      'bg-orange-100': 'bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200'
     };
     return gradientMap[baseColor] || baseColor;
   };
@@ -29,11 +29,12 @@ const Bubble: React.FC<BubbleProps> = ({ url, title, description, index, color }
       target="_blank"
       rel="noopener noreferrer"
       className={`w-full sm:w-64 md:w-72 lg:w-80 aspect-square rounded-2xl flex flex-col items-center justify-center p-6 
-                ${gradientClass} shadow-lg hover:shadow-xl text-gray-700
+                ${gradientClass} shadow-lg hover:shadow-xl text-gray-700 paper-tear
                 transition-all duration-500 hover:scale-105 hover:-translate-y-2
-                group relative overflow-hidden`}
+                group relative overflow-hidden border border-amber-200/50`}
       style={{ 
         animationDelay,
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.5)'
       }}
     >
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tl ${gradientClass.replace('-br', '-tl')} brightness-105`}></div>
